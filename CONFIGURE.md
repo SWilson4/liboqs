@@ -37,9 +37,11 @@ This means liboqs is built as a static library by default.
 
 Can be set to the following values:
 
-- `Debug`: This turns off all compiler optimizations and produces debugging information. **This value only has effect when the compiler is GCC or Clang**
+- `Debug`: This turns off all compiler optimizations and produces debugging information.
   - The [USE_COVERAGE](#USE_COVERAGE) option can also be specified to enable code coverage testing.
   - When the compiler is Clang, the [USE_SANITIZER](#USE_SANITIZER) option can also be specified to enable a Clang sanitizer.
+
+**This value only has effect when the compiler is GCC or Clang**
 
 - `Release`: This compiles code at the `O3` optimization level, and sets other compiler flags that reduce the size of the binary.
 
