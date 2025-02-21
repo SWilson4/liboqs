@@ -82,12 +82,17 @@ endif()
 add_executable(test_kem test_kem.c)
 target_link_libraries(test_kem PRIVATE ${TEST_DEPS})
 
+add_executable(test_kem_redundant test_kem_redundant.c)
+target_link_libraries(test_kem_redundant PRIVATE ${TEST_DEPS})
+
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows" AND BUILD_SHARED_LIBS)
     # workaround for Windows .dll
     if(MINGW OR MSYS OR CYGWIN OR CMAKE_CROSSCOMPILING)
         target_link_options(test_kem PRIVATE -Wl,--allow-multiple-definition)
+        target_link_options(test_kem_redundant PRIVATE -Wl,--allow-multiple-definition)
     else()
         target_link_options(test_kem PRIVATE "/FORCE:MULTIPLE")
+        target_link_options(test_kem_redundant PRIVATE "/FORCE:MULTIPLE")
     endif()
 endif()
 
@@ -97,7 +102,7 @@ target_link_libraries(test_kem_mem PRIVATE ${TEST_DEPS})
 add_executable(speed_kem speed_kem.c)
 target_link_libraries(speed_kem PRIVATE ${TEST_DEPS})
 
-set(KEM_TESTS example_kem kat_kem test_kem test_kem_mem speed_kem vectors_kem)
+set(KEM_TESTS example_kem kat_kem test_kem test_kem_redundant test_kem_mem speed_kem vectors_kem)
 
 # SIG API tests
 add_executable(example_sig example_sig.c)
